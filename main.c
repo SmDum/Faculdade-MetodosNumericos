@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <locale.h>
 
 /*
 Dicas:
@@ -43,8 +44,9 @@ scanf("%f", myVar+i);
 //free(myVar);
 */
 
-main()
+int main()
 {
+    setlocale(LC_ALL, "Portuguese");
     int i, tamanho =7;
     multi = (float *)malloc(tamanho * sizeof(float));
 
@@ -85,8 +87,11 @@ main()
 
     float a, b, erro;
 
-    printf("\nDigite o intervalo [A/B]: ");
-    scanf("%f, %f", &a, &b);
+    printf("\nDigite o intervalo A:B [A]: ");
+    scanf("%f", &a);
+
+    printf("\nDigite o intervalo A:B [B]: ");
+    scanf("%f", &b);
 
     printf("\nDigite o erro: ");
     scanf("%f", &erro);
@@ -95,41 +100,68 @@ main()
     float funca = funcaoX(a);
     float funcb = funcaoX(b);
 
-    printf("Resultado: %f %f %f\n", funcaoX(a), funcaoX(b));
+    printf("\nResultado Função [A]: %f", funcaoX(a));
+    printf("\nResultado Função [B]: %f", funcaoX(b));
     system("pause");
 
+    ImprimirCabecalhoTabela();
     if((funca*funcb) < 0)
     {
-        int I = 1;
+        int I = 1, K;
+
+        K = CalculaValorK(a, b, erro);
+        char fAfm, fBfm;
+        float m = acharPontoMedio(a,b);
+        float funcm = funcaoX(m);
+
+        if((funca * funcm)<0)
+        {
+            fBfm = '-';
+            fAfm = '+';
+        }
+        else
+        {
+            fBfm = '+';
+            fAfm = '-';
+        }
+
+        ImprimirTabela(I, a, b, m, funca, funcb, funcm, fAfm, fBfm);
+
+        do
+        {
+            float m = acharPontoMedio(a,b);
+            float funcm = funcaoX(m);
+
+            if((funca * funcm)<0)
+            {
+                b = m;
+                funcb = funcm;
+                fBfm = '-';
+                fAfm = '+';
+            }
+            else
+            {
+                a = m;
+                funca = funcm;
+                fBfm = '+';
+                fAfm = '-';
+            }
+            I++;
+            ImprimirTabela(I, a, b, m, funca, funcb, funcm, fAfm, fBfm);
+
+        }while(K>=I);
     }
+
     else
     {
-        printf("\nNão é possível achar o 0 da funcao...");
+        printf("\nDicotomia não é válida para o intervalo informado.\n");
     }
 
 
 
-    //Receber os valores de
-        //a, b, erro
-
-	//Verificar se no intervalo [A, B] existe zero de funcao
-
-	//Se existir encontar o valor de K
-	//K = CalculaValorK(A, B, Erro)
-
-    //Exibindo o cabecalho
-    ImprimirCabecalhoTabela();
-
-    //while (I <= K)
-    //{
-
-        //Implementacao da DICOTOMIA
-
-        //Exibindo os valores na tabela
-        ImprimirTabela(1, 2, 3, 4, 5, 6, 7, '+', '-');
-    //}
-
     system("pause");
+    free (multi);
+    return 0;
 }
 
 //Realiza o calculo do K (numero de passo)
@@ -178,4 +210,9 @@ void ImprimirTabela(int iteracao, float a, float b, float m, float fA, float fB,
 {
     //printf("%i |%.2f\t|%.2f\t|%.2f\t|%.2f\t|%.2f\t|%.2f\t|%c\t|%c\t|\n", iteracao, a, b, m, fA, fB, fM, fAfM, fMfB);
 	printf("%i |%.5f\t|%.5f\t|%.5f\t|%.5f\t|%.5f\t|%.5f\t|%c\t|%c\t|\n", iteracao, a, b, m, fA, fB, fM, fAfM, fMfB);
+}
+
+float acharPontoMedio(float a, float b)
+{
+    return (a+b)/2;
 }
