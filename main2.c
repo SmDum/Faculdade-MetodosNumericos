@@ -1,5 +1,5 @@
 /*
-    Giovanni de Lucca Gigomieri
+    Giovanni de Lucca Gomieri, 248662
     José Luiz Pinto Signoretti Garcia, 248896
     Samuel de Moraes Delgado, 248729
 */
