@@ -4,10 +4,9 @@
 #include <locale.h>
 
 /*
-Dicas:
-        Potencia: pow(base, expoente)
-        Arredondar para cima: ceil(valor)
-        Modulo/ValorAbsoluto: fabs(valor)
+    Giovanni de Lucca Gomieri, 248662
+    José Luiz Pinto Signoretti Garcia, 248896
+    Samuel de Moraes Delgado, 248729
 */
 
 // Prototipo das funcoes
