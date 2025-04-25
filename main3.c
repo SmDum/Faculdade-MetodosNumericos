@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
 // Função para ler os dados de entrada (quantidade de pontos e os pares (x, y))
 void lerDados(int *n, double **x, double **y)
 {
@@ -123,7 +122,7 @@ void imprimirPolinomio(int grau, double *coef)
     for (int i = 0; i <= grau; i++)
     {
         if (i > 0 && *(coef + i) >= 0)
-            printf("+ "); // Adiciona '+' para coeficientes positivos
+            printf("+ ");             // Adiciona '+' para coeficientes positivos
         printf("%.4lf", *(coef + i)); // Mostra coeficiente
 
         if (i >= 1)
