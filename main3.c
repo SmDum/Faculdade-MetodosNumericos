@@ -1,10 +1,15 @@
+/*
+    Cabeçalho:
+
+    Giovanni de Lucca Gomieri, 248662
+    José Luiz Pinto Signoretti Garcia, 248896
+    Samuel de Moraes Delgado, 248729
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-// Cabeçalho
-// Nome: Samuel de Moraes Delgado
-// RA: 248729
 
 // Função para ler os dados de entrada (quantidade de pontos e os pares (x, y))
 void lerDados(int *n, double **x, double **y)
